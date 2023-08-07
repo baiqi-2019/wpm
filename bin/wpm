@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+// const program = require('commander')
+
+// // 定义当前版本
+// // 定义使用方法
+// // 定义四个指令
+// program
+//   .version(require('../package').version)
+//   .usage('<command> [options]')
+//   .command('add', 'add a new template')
+//   .command('delete', 'delete a template')
+//   .command('list', 'list all the templates')
+//   .command('init', 'generate a new project from a template')
+
+// // 解析命令行参数
+// program.parse(process.argv)
+
+// 自定义脚手架
+
+// 名称，描述，版本号，用法提示。
+const program = require("commander");
+const pkg = require("./../package.json");
+
+program.version(pkg.version, "-v --version");
+
+program.parse(process.argv);
+
+// projectName 是一个可选参数
+
+program
+  .command("init [projectName]")
+  .description("初始化项目")
+  // 添加一个选项
+  .option("-f --force", "如果存在输入的项目目录，强制删除项目目录")
+  .action((projectName, cmd) => {
+    // projectName 是我们输入的参数，
+    console.log(projectName);
+    // cmd是Command对象
+    console.log(cmd.force);
+  });
